@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Callback;
 
 import java.util.ArrayList;
 
@@ -90,6 +94,20 @@ public class SpecilaityAdapter extends RecyclerView.Adapter<SpecilaityAdapter.Vi
         // with that element
         holder.getSpecialityNameTextView().setText(specialityNamesList.get(position));
         holder.getSpecialityDescriptionTextView().setText(specialityDescriptionList.get(position));
+
+        Picasso.with(mActivity.getApplicationContext()).load(specialityIconList.get(position)).
+                into(holder.getSpecilaityIconImageView(), new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d("Success","Image loaded successfully.");
+//                mIssueImagesPagerActivityFragment.showProgress(false);
+                    }
+
+                    @Override
+                    public void onError() {
+                        Toast.makeText(mActivity.getApplicationContext(),"Issue downloading image!",Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     @Override
