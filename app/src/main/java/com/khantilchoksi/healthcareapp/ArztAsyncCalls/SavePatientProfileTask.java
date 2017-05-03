@@ -71,7 +71,6 @@ public class SavePatientProfileTask extends AsyncTask<Void, Void, Boolean> {
         this.pincode = pincode;
         this.progressDialog = progressDialog;
 
-
     }
 
     @Override

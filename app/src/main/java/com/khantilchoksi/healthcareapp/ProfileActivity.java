@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MyProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 //implements ProfileFragment.OnFragmentInteractionListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -94,7 +94,7 @@ public class PersonalFragment extends Fragment {
         editProfileTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent profileActivity = new Intent(getActivity() ,MyProfileActivity.class);
+                Intent profileActivity = new Intent(getActivity() ,ProfileActivity.class);
                 getActivity().startActivity(profileActivity);
             }
         });

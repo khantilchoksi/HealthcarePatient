@@ -24,6 +24,7 @@ public class ShowDoctorsActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
