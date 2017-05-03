@@ -62,7 +62,16 @@
         <activity
             android:name=".DoctorClinicSlotsActivity"
             android:label="@string/title_activity_doctor_clinic_slots"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BookAppointmentActivity"
+            android:label="@string/title_activity_book_appointment"
+            android:parentActivityName=".DoctorClinicSlotsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.khantilchoksi.healthcareapp.DoctorClinicSlotsActivity" />
+        </activity>
     </application>
 
 </manifest>

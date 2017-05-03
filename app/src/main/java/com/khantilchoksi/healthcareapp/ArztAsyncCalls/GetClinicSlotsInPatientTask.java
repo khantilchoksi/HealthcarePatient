@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.khantilchoksi.healthcareapp.R;
 import com.khantilchoksi.healthcareapp.Slot;
+import com.khantilchoksi.healthcareapp.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,9 +34,9 @@ import java.util.Map;
  * Created by Khantil on 22-03-2017.
  */
 
-public class GetSlotsTask extends AsyncTask<Void, Void, Boolean> {
+public class GetClinicSlotsInPatientTask extends AsyncTask<Void, Void, Boolean> {
 
-    private static final String LOG_TAG = GetSlotsTask.class.getSimpleName();
+    private static final String LOG_TAG = GetClinicSlotsInPatientTask.class.getSimpleName();
     Context context;
     String mClinicId;
     String mDoctorId;
@@ -48,7 +49,7 @@ public class GetSlotsTask extends AsyncTask<Void, Void, Boolean> {
 
     public AsyncResponse delegate = null;
 
-    public GetSlotsTask(String doctorId, String clinicId, Context context, AsyncResponse delegate){
+    public GetClinicSlotsInPatientTask(String doctorId, String clinicId, Context context, AsyncResponse delegate){
         this.mDoctorId = doctorId;
         this.mClinicId = clinicId;
         this.context = context;
@@ -66,7 +67,7 @@ public class GetSlotsTask extends AsyncTask<Void, Void, Boolean> {
 
         try {
 
-            final String CLIENT_BASE_URL = context.getResources().getString(R.string.base_url).concat("getDoctorClinicSlotDetails");
+            final String CLIENT_BASE_URL = context.getResources().getString(R.string.base_url).concat("getClinicSlotsInPatientDetails");
             URL url = new URL(CLIENT_BASE_URL);
 
 
@@ -82,6 +83,7 @@ public class GetSlotsTask extends AsyncTask<Void, Void, Boolean> {
             Map<String, String> parameters = new HashMap<>();
             parameters.put("doctorId", mDoctorId);
             parameters.put("clinicId", mClinicId);
+            parameters.put("patientId", String.valueOf(Utility.getPatientId(context)));
 
             // encode parameters
             Iterator entries = parameters.entrySet().iterator();
