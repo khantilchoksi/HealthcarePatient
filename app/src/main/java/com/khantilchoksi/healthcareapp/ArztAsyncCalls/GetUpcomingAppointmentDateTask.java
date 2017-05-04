@@ -35,28 +35,28 @@ import java.util.Map;
  * Created by Khantil on 22-03-2017.
  */
 
-public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
+public class GetUpcomingAppointmentDateTask extends AsyncTask<Void, Void, Boolean> {
 
-    private static final String LOG_TAG = CreateAppointmentTask.class.getSimpleName();
+    private static final String LOG_TAG = GetUpcomingAppointmentDateTask.class.getSimpleName();
     Context context;
     Activity activity;
     String mDcId;
-    String mAppiontmentDate;
     ProgressDialog progressDialog;
     String issue;
+    String mUpcomingAppointmentDate;
 
-    /*public interface AsyncResponse {
-        void processSlotFinish(String response);
+    public interface AsyncResponse {
+        void processUpcomingAppointmentDateFinish(String upcomingAppointmentDate, ProgressDialog progressDialog);
     }
 
-    public AsyncResponse delegate = null;*/
+    public AsyncResponse delegate = null;
 
-    public CreateAppointmentTask(String dcId, String appiontmentDate, Context context, Activity activity, ProgressDialog progressDialog){
+    public GetUpcomingAppointmentDateTask(String dcId, Context context, Activity activity, AsyncResponse asyncResponse,ProgressDialog progressDialog){
         this.mDcId = dcId;
         this.context = context;
         this.activity = activity;
+        this.delegate = asyncResponse;
         this.progressDialog = progressDialog;
-        this.mAppiontmentDate = appiontmentDate;
         issue = context.getResources().getString(R.string.error_unknown_error);
         //this.delegate = delegate;
     }
@@ -70,7 +70,7 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
 
         try {
 
-            final String CLIENT_BASE_URL = context.getResources().getString(R.string.base_url).concat("createAppointment");
+            final String CLIENT_BASE_URL = context.getResources().getString(R.string.base_url).concat("getUpcomingAppointmentDate");
             URL url = new URL(CLIENT_BASE_URL);
 
 
@@ -85,7 +85,6 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
             Uri.Builder builder = new Uri.Builder();
             Map<String, String> parameters = new HashMap<>();
             parameters.put("dcId",mDcId);
-            parameters.put("appointmentDate",mAppiontmentDate);
             parameters.put("patientId", String.valueOf(Utility.getPatientId(context)));
 
             // encode parameters
@@ -185,12 +184,8 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
         Log.d(LOG_TAG, "Success Boolean Tag: " + success.toString());
         if (success) {
 
-            //delegate.processSlotFinish(success.toString());
-            progressDialog.dismiss();
-            Toast.makeText(context,"Appointment Booked!",Toast.LENGTH_LONG).show();
-            Intent homeIntent = new Intent(activity, HomeActivity.class);
-            activity.startActivity(homeIntent);
-            activity.finish();
+            delegate.processUpcomingAppointmentDateFinish(mUpcomingAppointmentDate, progressDialog);
+
 
         } else {
             progressDialog.dismiss();
@@ -208,15 +203,16 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
 
     private boolean fetchDoctorClinics(String clientCredStr) throws JSONException {
 
-        final String isSuccessfullyAddedString = "successfullyAdded";
-        final String errorMessageString = "errorMessage";
+        final String upcomingAppointmentDateString = "upcomingAppointmentDate";
+
 
         JSONObject clientJson = new JSONObject(clientCredStr);
-        String successFullyAdded = clientJson.getString(isSuccessfullyAddedString);
-        if(successFullyAdded.contains("true")){
+
+        if(clientJson != null){
+            mUpcomingAppointmentDate = clientJson.getString(upcomingAppointmentDateString);
             return true;
         }else{
-            issue = clientJson.getString(errorMessageString);
+
             return false;
         }
 

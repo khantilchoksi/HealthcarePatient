@@ -3,13 +3,11 @@ package com.khantilchoksi.healthcareapp.ArztAsyncCalls;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.khantilchoksi.healthcareapp.HomeActivity;
 import com.khantilchoksi.healthcareapp.R;
 import com.khantilchoksi.healthcareapp.Utility;
 
@@ -35,30 +33,42 @@ import java.util.Map;
  * Created by Khantil on 22-03-2017.
  */
 
-public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
+public class GetDoctorClinicSlotInfoTask extends AsyncTask<Void, Void, Boolean> {
 
-    private static final String LOG_TAG = CreateAppointmentTask.class.getSimpleName();
+    private static final String LOG_TAG = GetDoctorClinicSlotInfoTask.class.getSimpleName();
     Context context;
     Activity activity;
-    String mDcId;
-    String mAppiontmentDate;
-    ProgressDialog progressDialog;
-    String issue;
 
-    /*public interface AsyncResponse {
-        void processSlotFinish(String response);
+    String mDcId;
+    String mDoctorName;
+    String mDoctorQualifications;
+    String mDoctorSpecialities;
+    String mClinicName;
+    String mAppointmentDay;
+    String mVisitingHours;
+    String mConsultationFees;
+    String mClinicAddress;
+
+
+    ProgressDialog progressDialog;
+
+    public interface AsyncResponse {
+        void processDoctorClinicTaskInfoFinish(String doctorName, String doctorQualificaitons,
+                                               String doctorSpecialities, String clinicName,
+                                               String appointmentDay, String visitingHours,
+                                               String consultationFees, String clinicAddress,
+                                               ProgressDialog progressDialog);
     }
 
-    public AsyncResponse delegate = null;*/
+    public AsyncResponse delegate = null;
 
-    public CreateAppointmentTask(String dcId, String appiontmentDate, Context context, Activity activity, ProgressDialog progressDialog){
+    public GetDoctorClinicSlotInfoTask(String dcId, Context context, Activity activity, AsyncResponse asyncResponse, ProgressDialog progressDialog){
         this.mDcId = dcId;
         this.context = context;
         this.activity = activity;
+        this.delegate = asyncResponse;
         this.progressDialog = progressDialog;
-        this.mAppiontmentDate = appiontmentDate;
-        issue = context.getResources().getString(R.string.error_unknown_error);
-        //this.delegate = delegate;
+
     }
 
     @Override
@@ -70,7 +80,7 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
 
         try {
 
-            final String CLIENT_BASE_URL = context.getResources().getString(R.string.base_url).concat("createAppointment");
+            final String CLIENT_BASE_URL = context.getResources().getString(R.string.base_url).concat("getDoctorClinicSlotInfo");
             URL url = new URL(CLIENT_BASE_URL);
 
 
@@ -85,7 +95,6 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
             Uri.Builder builder = new Uri.Builder();
             Map<String, String> parameters = new HashMap<>();
             parameters.put("dcId",mDcId);
-            parameters.put("appointmentDate",mAppiontmentDate);
             parameters.put("patientId", String.valueOf(Utility.getPatientId(context)));
 
             // encode parameters
@@ -146,10 +155,10 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
 
             clientCredStr = buffer.toString();
 
-            Log.d(LOG_TAG, "Doctor Clinics Slots Credential JSON String : " + clientCredStr);
+            Log.d(LOG_TAG, "Appointments Credential JSON String : " + clientCredStr);
 
 
-            return fetchDoctorClinics(clientCredStr);
+            return fetchAppointmentsClinics(clientCredStr);
 
         } catch (IOException e) {
             Log.d(LOG_TAG, "Error ", e);
@@ -177,7 +186,7 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
 
     @Override
     protected void onCancelled() {
-
+        progressDialog.dismiss();
     }
 
     @Override
@@ -185,41 +194,66 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
         Log.d(LOG_TAG, "Success Boolean Tag: " + success.toString());
         if (success) {
 
-            //delegate.processSlotFinish(success.toString());
-            progressDialog.dismiss();
-            Toast.makeText(context,"Appointment Booked!",Toast.LENGTH_LONG).show();
-            Intent homeIntent = new Intent(activity, HomeActivity.class);
-            activity.startActivity(homeIntent);
-            activity.finish();
+            delegate.processDoctorClinicTaskInfoFinish(
+                    mDoctorName,
+                    mDoctorQualifications,
+                    mDoctorSpecialities,
+                    mClinicName,
+                    mAppointmentDay,
+                    mVisitingHours,
+                    mConsultationFees,
+                    mClinicAddress,
+                    progressDialog
+            );
 
         } else {
+
             progressDialog.dismiss();
+
 
                 /*Snackbar.make(, R.string.error_unknown_error,
                         Snackbar.LENGTH_LONG)
                         .show();*/
-            Toast.makeText(context,issue,Toast.LENGTH_SHORT).show();
-            Intent homeIntent = new Intent(activity, HomeActivity.class);
-            activity.startActivity(homeIntent);
-            activity.finish();
+            Toast.makeText(context,context.getResources().getString(R.string.error_unknown_error),Toast.LENGTH_SHORT).show();
 
         }
     }
 
-    private boolean fetchDoctorClinics(String clientCredStr) throws JSONException {
+    private boolean fetchAppointmentsClinics(String clientCredStr) throws JSONException {
 
-        final String isSuccessfullyAddedString = "successfullyAdded";
-        final String errorMessageString = "errorMessage";
+        final String mDoctorNameString = "doctorName";
+        final String mDoctorQualificationsString = "doctorQualifications";
+        final String mDoctorSpecialitiesString = "doctorSpecialities";
+        final String mClinicNameString = "clinicName";
+        final String mAppointmentDayString = "slotDay";
+        final String mSlotStartTimeString = "slotStartTime";
+        final String mSlotEndTimeString = "slotEndTime";
+        final String mConsultationFeesString = "slotFees";
+        final String mClinicAddressString = "clinicAddress";
+
 
         JSONObject clientJson = new JSONObject(clientCredStr);
-        String successFullyAdded = clientJson.getString(isSuccessfullyAddedString);
-        if(successFullyAdded.contains("true")){
+
+
+
+        if(clientJson != null) {
+
+            mDoctorName = clientJson.getString(mDoctorNameString);
+            mDoctorQualifications = clientJson.getString(mDoctorQualificationsString);
+            mDoctorSpecialities = clientJson.getString(mDoctorSpecialitiesString);
+
+            mClinicName = clientJson.getString(mClinicNameString);
+            mAppointmentDay = clientJson.getString(mAppointmentDayString);
+            mVisitingHours = clientJson.getString(mSlotStartTimeString) + " - " + clientJson.getString(mSlotEndTimeString);
+            mConsultationFees = clientJson.getString(mConsultationFeesString);
+
+            mClinicAddress = clientJson.getString(mClinicAddressString);
             return true;
-        }else{
-            issue = clientJson.getString(errorMessageString);
-            return false;
         }
 
+
+
+        return false;
     }
 
 

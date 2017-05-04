@@ -1,8 +1,8 @@
 package com.khantilchoksi.healthcareapp;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.khantilchoksi.healthcareapp.ArztAsyncCalls.CreateAppointmentTask;
 
 import java.util.ArrayList;
 
@@ -69,7 +67,12 @@ public class SlotsRecyclerAdapter extends RecyclerView.Adapter<SlotsRecyclerAdap
             bookButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ProgressDialog progressDialog = new ProgressDialog(mActivity,
+
+                    Intent bookAppointmentIntent = new Intent(mActivity, BookAppointmentActivity.class);
+                    bookAppointmentIntent.putExtra("dcId",mSlotsList.get(getAdapterPosition()).getSlotId());
+                    mActivity.startActivity(bookAppointmentIntent);
+
+                    /*ProgressDialog progressDialog = new ProgressDialog(mActivity,
                             R.style.AppTheme_Dark_Dialog);
                     progressDialog.setIndeterminate(true);
                     progressDialog.setMessage("Booking Appointment...");
@@ -77,7 +80,7 @@ public class SlotsRecyclerAdapter extends RecyclerView.Adapter<SlotsRecyclerAdap
                     CreateAppointmentTask createAppointmentTask = new CreateAppointmentTask(
                             mSlotsList.get(getAdapterPosition()).getSlotId(),
                             mContext,mActivity, progressDialog);
-                    createAppointmentTask.execute((Void) null);
+                    createAppointmentTask.execute((Void) null);*/
                 }
             });
 

@@ -217,7 +217,9 @@ public class ProfileFragment extends Fragment implements GetPatientProfileTask.A
         birthdayEditTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(getContext(),date,1995,0, 1).show();
+                new DatePickerDialog(getContext(),date,myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
             }
         });
