@@ -55,9 +55,10 @@
                     app:srcCompat="@drawable/ic_experience" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Experience  "
+                    android:text="Qualifications"
                     android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
                     android:gravity="center"
@@ -78,23 +79,155 @@
 
 
                 <TextView
-                    android:id="@+id/doctor_experience_text_view"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/doctor_qualification_text_view"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
                     android:layout_marginStart="@dimen/activity_horizontal_margin_half"
                     android:textColor="@color/secondary_text"
                     android:layout_gravity="center"
-                    android:text="31" />
+                    android:text="M.B.B.S., M.D." />
 
-                <TextView
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/material_grey_200" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_experience" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Specialities"
                     android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/primary_text"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/iron" />
+
+
+
+                <TextView
+                    android:id="@+id/doctor_specialities_text_view"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin_half"
                     android:textColor="@color/secondary_text"
                     android:layout_gravity="center"
-                    android:text="years" />
+                    android:text="Urology, Denistry" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/material_grey_200" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_experience" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Experience"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/primary_text"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/iron" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/doctor_experience_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin_half"
+                        android:textColor="@color/secondary_text"
+                        android:layout_gravity="center"
+                        android:text="31" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
+                        android:textColor="@color/secondary_text"
+                        android:layout_gravity="center"
+                        android:text="years" />
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
@@ -122,9 +255,10 @@
                     app:srcCompat="@drawable/ic_address" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Clinic Areas "
+                    android:text="Clinic Areas"
                     android:layout_marginLeft="4dp"
                     android:layout_marginStart="4dp"
                     android:gravity="center"
@@ -146,7 +280,8 @@
 
                 <TextView
                     android:id="@+id/doctor_visiting_areas_text_view"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
                     android:layout_marginStart="@dimen/activity_horizontal_margin_half"

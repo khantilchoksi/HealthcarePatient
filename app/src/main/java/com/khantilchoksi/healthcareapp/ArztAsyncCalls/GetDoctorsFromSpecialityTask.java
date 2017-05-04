@@ -85,7 +85,7 @@ public class GetDoctorsFromSpecialityTask extends AsyncTask<Void, Void, Boolean>
 
             Uri.Builder builder = new Uri.Builder();
             Map<String, String> parameters = new HashMap<>();
-            parameters.put("specialityId", mSpecialityId);
+                parameters.put("specialityId", mSpecialityId);
 
             // encode parameters
             Iterator entries = parameters.entrySet().iterator();
@@ -208,11 +208,17 @@ public class GetDoctorsFromSpecialityTask extends AsyncTask<Void, Void, Boolean>
         final String doctorIdString = "doctorId";
         final String doctorNameString = "doctorName";
         final String clinicAreasListString = "clinicAreasList";
+        final String doctorQualificationsString = "doctorQualifications";
+        final String doctorSpecialitiesString = "doctorSpecialities";
+        final String doctorExperienceString = "experience";
 
 
         String tempId;
         String tempName;
         ArrayList<String> tempAreas;
+        String tempQualifications;
+        String tempSpecialities;
+        int tempExperience;
 
 
         JSONObject clientJson = new JSONObject(clientCredStr);
@@ -225,13 +231,19 @@ public class GetDoctorsFromSpecialityTask extends AsyncTask<Void, Void, Boolean>
                     tempId = doctorJSONObject.getString(doctorIdString);
                     tempName = doctorJSONObject.getString(doctorNameString);
 
+                    tempQualifications = doctorJSONObject.getString(doctorQualificationsString);
+                    tempSpecialities = doctorJSONObject.getString(doctorSpecialitiesString);
+
+                    tempExperience = doctorJSONObject.getInt(doctorExperienceString);
+
                     JSONArray areasJsonAray = doctorJSONObject.getJSONArray(clinicAreasListString);
                     tempAreas = new ArrayList<String>();
                     for(int j=0;j<areasJsonAray.length();j++){
                         tempAreas.add(areasJsonAray.getString(j));
                     }
 
-                    doctorsList.add(new Doctor(tempId,tempName,tempAreas));
+                    doctorsList.add(new Doctor(tempId,tempName,tempExperience,
+                            tempQualifications,tempSpecialities, tempAreas));
 
                     Log.d(LOG_TAG,"ID : "+tempId+"Name: "+tempName);
                 }

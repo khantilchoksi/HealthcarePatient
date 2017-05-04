@@ -41,6 +41,23 @@ public class DoctorsRecyclerAdapter extends RecyclerView.Adapter<DoctorsRecycler
         private final TextView doctorNameTextView;
         private final TextView doctorClinicAreasTextView;
 
+        private final TextView doctorQualificaitonsTextView;
+        private final TextView doctorSpecialitiesTextView;
+
+        private final TextView doctorExperienceTextView;
+
+        public TextView getDoctorQualificaitonsTextView() {
+            return doctorQualificaitonsTextView;
+        }
+
+        public TextView getDoctorSpecialitiesTextView() {
+            return doctorSpecialitiesTextView;
+        }
+
+        public TextView getDoctorExperienceTextView() {
+            return doctorExperienceTextView;
+        }
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -57,9 +74,13 @@ public class DoctorsRecyclerAdapter extends RecyclerView.Adapter<DoctorsRecycler
                 }
             });
 
+
             doctorNameTextView = (TextView)itemView.findViewById(R.id.doctor_name_text_view);
             doctorClinicAreasTextView = (TextView)itemView.findViewById(R.id.doctor_visiting_areas_text_view);
 
+            doctorQualificaitonsTextView = (TextView)itemView.findViewById(R.id.doctor_qualification_text_view);
+            doctorSpecialitiesTextView = (TextView)itemView.findViewById(R.id.doctor_specialities_text_view);
+            doctorExperienceTextView = (TextView)itemView.findViewById(R.id.doctor_experience_text_view);
         }
     }
 
@@ -84,7 +105,11 @@ public class DoctorsRecyclerAdapter extends RecyclerView.Adapter<DoctorsRecycler
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
         holder.getDoctorNameTextView().setText(doctorsList.get(position).getDoctorName());
-        holder.getDoctorClinicAreasTextView().setText(android.text.TextUtils.join(",", doctorsList.get(position).getClinicsAreaList()));
+        holder.getDoctorClinicAreasTextView().setText(android.text.TextUtils.join(", ", doctorsList.get(position).getClinicsAreaList()));
+
+        holder.getDoctorQualificaitonsTextView().setText(doctorsList.get(position).getDoctorQualifications());
+        holder.getDoctorSpecialitiesTextView().setText(doctorsList.get(position).getDoctorSpecialities());
+        holder.getDoctorExperienceTextView().setText(doctorsList.get(position).getExperience());
     }
 
     @Override

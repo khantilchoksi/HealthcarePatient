@@ -192,7 +192,6 @@ public class BookAppointmentActivityFragment extends Fragment implements  GetDoc
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
 
-
         CreateAppointmentTask createAppointmentTask = new CreateAppointmentTask(
                 mDcId, sdf.format(myCalendar.getTime()),
                 getContext(),getActivity(), progressDialog);
