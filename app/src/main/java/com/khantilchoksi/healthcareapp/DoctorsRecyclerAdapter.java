@@ -109,7 +109,7 @@ public class DoctorsRecyclerAdapter extends RecyclerView.Adapter<DoctorsRecycler
 
         holder.getDoctorQualificaitonsTextView().setText(doctorsList.get(position).getDoctorQualifications());
         holder.getDoctorSpecialitiesTextView().setText(doctorsList.get(position).getDoctorSpecialities());
-        holder.getDoctorExperienceTextView().setText(doctorsList.get(position).getExperience());
+        holder.getDoctorExperienceTextView().setText(""+doctorsList.get(position).getExperience());
     }
 
     @Override

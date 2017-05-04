@@ -234,7 +234,7 @@ public class GetDoctorsFromSpecialityTask extends AsyncTask<Void, Void, Boolean>
                     tempQualifications = doctorJSONObject.getString(doctorQualificationsString);
                     tempSpecialities = doctorJSONObject.getString(doctorSpecialitiesString);
 
-                    tempExperience = doctorJSONObject.getInt(doctorExperienceString);
+                    tempExperience = 15;
 
                     JSONArray areasJsonAray = doctorJSONObject.getJSONArray(clinicAreasListString);
                     tempAreas = new ArrayList<String>();
