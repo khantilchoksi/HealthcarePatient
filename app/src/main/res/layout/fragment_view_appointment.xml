@@ -397,6 +397,15 @@ tools:showIn="@layout/activity_view_appointment">
         android:background="@color/material_grey_500" />
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Attachements"
+        android:textColor="@color/primary_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
         android:id="@+id/noPhotosTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -416,18 +425,63 @@ tools:showIn="@layout/activity_view_appointment">
         android:numColumns="3"
         android:visibility="gone" />
 
-
-
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_cancel"
+        android:id="@+id/upload_image_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:padding="12dp"
         android:textSize="18sp"
         android:textColor="@color/white"
-        android:text="Cancel Appointment"
+        android:text="Take Images"
         android:background="@color/colorPrimary" />
+
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagesGridView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:numColumns="3"
+        android:layout_marginTop="16dp">
+
+    </GridView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_upload"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="2dp"
+            android:padding="4dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="Upload Attachements"
+            android:background="@color/colorPrimary" />
+
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:padding="4dp"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:text="Cancel Appointment"
+            android:background="@color/colorPrimary" />
+    </LinearLayout>
+
+
 
 </LinearLayout>
 

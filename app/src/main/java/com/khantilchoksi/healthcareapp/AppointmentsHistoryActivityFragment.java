@@ -64,7 +64,7 @@ public class AppointmentsHistoryActivityFragment extends Fragment implements Get
         if(mAppointmentsList.isEmpty()){
             mNoAppointmentsLinearLayout.setVisibility(View.VISIBLE);
         }else{
-            mAppointmentAdapter = new AppointmentsAdapter(this.mAppointmentsList, false,getActivity());
+            mAppointmentAdapter = new AppointmentsAdapter(this.mAppointmentsList, getActivity());
             mRecyclerView.setAdapter(mAppointmentAdapter);
         }
         progressDialog.dismiss();

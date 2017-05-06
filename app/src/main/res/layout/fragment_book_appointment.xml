@@ -369,7 +369,7 @@
             android:padding="12dp"
             android:textSize="18sp"
             android:textColor="@color/white"
-            android:text="Upload Images"
+            android:text="Take Images"
             android:background="@color/colorPrimary" />
 
 

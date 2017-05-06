@@ -87,6 +87,7 @@ public class BookAppointmentActivityFragment extends Fragment implements  GetDoc
 
     private Button mBookButton;
 
+
     private String mDcId;
     private String mAppointmentDate;
     private String mAppointmentDay = "Tuesday";
