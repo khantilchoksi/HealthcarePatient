@@ -75,12 +75,15 @@
     <string name="title_activity_show_doctors">ShowDoctorsActivity</string>
     <string name="no_doctors_registered_for_this_specialtiy">No doctors registered for this speciality.</string>
     <string name="no_dotors_available">No doctors available.</string>
-    <string name="title_activity_doctor_clinic_slots">DoctorClinicSlotsActivity</string>
+    <string name="title_activity_doctor_clinic_slots">Clinics</string>
     <string name="no_clinics_available">Doctor has not registered any clincis with us.</string>
 
     <string name="rupee_symbol">\u20B9</string>
     <string name="button_book">Book</string>
     <string name="no_appointments_avaliable">You do not have any upcoming appointments.</string>
+    <string name="no_past_appointments_avaliable">You do not have any past appointments.</string>
     <string name="cancel_appointment">Cancel</string>
     <string name="title_activity_book_appointment">Book Appointment</string>
+    <string name="title_activity_appointments_history">Appointments History</string>
+    <string name="title_activity_view_appointment">ViewAppointmentActivity</string>
 </resources>

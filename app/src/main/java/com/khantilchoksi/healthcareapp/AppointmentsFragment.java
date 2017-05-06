@@ -112,7 +112,7 @@ public class AppointmentsFragment extends Fragment implements GetAppointmentsTas
         if(mAppointmentsList.isEmpty()){
             mNoAppointmentsLinearLayout.setVisibility(View.VISIBLE);
         }else{
-            mAppointmentAdapter = new AppointmentsAdapter(this.mAppointmentsList, getActivity());
+            mAppointmentAdapter = new AppointmentsAdapter(this.mAppointmentsList, true,getActivity());
             mRecyclerView.setAdapter(mAppointmentAdapter);
         }
         progressDialog.dismiss();

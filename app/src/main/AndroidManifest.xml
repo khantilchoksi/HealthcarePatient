@@ -58,19 +58,43 @@
         <activity
             android:name=".ShowDoctorsActivity"
             android:label="@string/title_activity_show_doctors"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".DoctorClinicSlotsActivity"
             android:label="@string/title_activity_doctor_clinic_slots"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ShowDoctorsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BookAppointmentActivity"
             android:label="@string/title_activity_book_appointment"
+            android:launchMode="singleTop"
             android:parentActivityName=".DoctorClinicSlotsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.khantilchoksi.healthcareapp.DoctorClinicSlotsActivity" />
+        </activity>
+        <activity
+            android:name=".AppointmentsHistoryActivity"
+            android:label="@string/title_activity_appointments_history"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.khantilchoksi.healthcareapp.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".ViewAppointmentActivity"
+            android:label="@string/title_activity_view_appointment"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.khantilchoksi.healthcareapp.HomeActivity" />
         </activity>
     </application>
 

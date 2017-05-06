@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -96,6 +97,15 @@ public class PersonalFragment extends Fragment {
             public void onClick(View v) {
                 Intent profileActivity = new Intent(getActivity() ,ProfileActivity.class);
                 getActivity().startActivity(profileActivity);
+            }
+        });
+
+        LinearLayout appointmentsHistoryLinearLayout = (LinearLayout) rootView.findViewById(R.id.appointments_history_linear_layout);
+        appointmentsHistoryLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent appointmentsHistoryIntent = new Intent(getActivity() ,AppointmentsHistoryActivity.class);
+                getActivity().startActivity(appointmentsHistoryIntent);
             }
         });
 

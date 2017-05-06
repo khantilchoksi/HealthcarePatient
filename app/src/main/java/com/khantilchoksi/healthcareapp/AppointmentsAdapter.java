@@ -2,6 +2,7 @@ package com.khantilchoksi.healthcareapp;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
     private ArrayList<Appointment> mAppointmentsList;
     private Activity mActivity;
+    private boolean mIsCancelledButtonShown;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -35,7 +37,14 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         private final TextView appointmentStartTimeTextView;
         private final TextView appointmentEndTimeTextView;
         private final TextView clinicAddressTextView;
+
+        public Button getCancelAppointmentButton() {
+            return cancelAppointmentButton;
+        }
+
         private final Button cancelAppointmentButton;
+
+        private final Button viewAppointmentButton;
 
         public TextView getDoctorNameTextView() {
             return doctorNameTextView;
@@ -64,6 +73,17 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         public ViewHolder(View itemView) {
             super(itemView);
 
+            viewAppointmentButton = (Button) itemView.findViewById(R.id.view_appointment_button);
+            viewAppointmentButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent viewIntent = new Intent(mActivity,ViewAppointmentActivity.class);
+                    viewIntent.putExtra("appointmentId",
+                            mAppointmentsList.get(getAdapterPosition()).getAppointmentId());
+                    mActivity.startActivity(viewIntent);
+                }
+            });
+
             cancelAppointmentButton = (Button) itemView.findViewById(R.id.cancel_appointment_button);
             cancelAppointmentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,7 +95,8 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
                     progressDialog.setMessage("Cancelling Appointment...");
                     progressDialog.show();
                     CancelAppointmentTask cancelAppointmentTask =
-                            new CancelAppointmentTask(mAppointmentsList.get(getAdapterPosition()).getAppointmentId(),
+                            new CancelAppointmentTask(
+                                    mAppointmentsList.get(getAdapterPosition()).getAppointmentId(),
                                     mActivity.getApplicationContext(),mActivity,progressDialog);
                     cancelAppointmentTask.execute((Void) null);
                 }
@@ -104,8 +125,9 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         }
     }
 
-    public AppointmentsAdapter(ArrayList<Appointment> appointmentsList, Activity activity) {
+    public AppointmentsAdapter(ArrayList<Appointment> appointmentsList, boolean isCancelledButtonShown,Activity activity) {
         this.mAppointmentsList = appointmentsList;
+        this.mIsCancelledButtonShown = isCancelledButtonShown;
         this.mActivity = activity;
     }
 
@@ -123,6 +145,10 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
+        if(!mIsCancelledButtonShown){
+            //remove cancel button
+            holder.getCancelAppointmentButton().setVisibility(View.INVISIBLE);
+        }
         holder.getDoctorNameTextView().setText(mAppointmentsList.get(position).getDoctorName());
         holder.getAppointmentDateTextView().setText(mAppointmentsList.get(position).getAppointmentDate());
         holder.getAppointmentDayTextView().setText(mAppointmentsList.get(position).getAppointmentDay());
