@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.khantilchoksi.healthcareapp.R;
 import com.khantilchoksi.healthcareapp.Doctor;
+import com.khantilchoksi.healthcareapp.Utility;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,6 +87,7 @@ public class GetDoctorsFromSpecialityTask extends AsyncTask<Void, Void, Boolean>
             Uri.Builder builder = new Uri.Builder();
             Map<String, String> parameters = new HashMap<>();
                 parameters.put("specialityId", mSpecialityId);
+                parameters.put("patientId", String.valueOf(Utility.getPatientId(context)));
 
             // encode parameters
             Iterator entries = parameters.entrySet().iterator();
