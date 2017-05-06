@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.khantilchoksi.healthcareapp.AttachmentImagesArrayAdapter;
 import com.khantilchoksi.healthcareapp.HomeActivity;
 import com.khantilchoksi.healthcareapp.R;
 import com.khantilchoksi.healthcareapp.Utility;
@@ -42,6 +43,7 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
     Activity activity;
     String mDcId;
     String mAppiontmentDate;
+    AttachmentImagesArrayAdapter mAttachmentImagesArrayAdapter;
     ProgressDialog progressDialog;
     String issue;
 
@@ -51,12 +53,13 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
 
     public AsyncResponse delegate = null;*/
 
-    public CreateAppointmentTask(String dcId, String appiontmentDate, Context context, Activity activity, ProgressDialog progressDialog){
+    public CreateAppointmentTask(String dcId, String appiontmentDate, AttachmentImagesArrayAdapter attachmentImagesArrayAdapter, Context context, Activity activity, ProgressDialog progressDialog){
         this.mDcId = dcId;
         this.context = context;
         this.activity = activity;
         this.progressDialog = progressDialog;
         this.mAppiontmentDate = appiontmentDate;
+        this.mAttachmentImagesArrayAdapter = attachmentImagesArrayAdapter;
         issue = context.getResources().getString(R.string.error_unknown_error);
         //this.delegate = delegate;
     }
@@ -95,6 +98,14 @@ public class CreateAppointmentTask extends AsyncTask<Void, Void, Boolean> {
                 builder.appendQueryParameter(entry.getKey().toString(), entry.getValue().toString());
                 entries.remove();
             }
+
+            if(!mAttachmentImagesArrayAdapter.isEmpty()){
+
+                for(int i=0;i<mAttachmentImagesArrayAdapter.getCount();i++){
+                    builder.appendQueryParameter("image[]",mAttachmentImagesArrayAdapter.getStringImage(i));
+                }
+            }
+
             String requestBody = builder.build().getEncodedQuery();
             Log.d(LOG_TAG, "Service Call URL : " + CLIENT_BASE_URL);
             Log.d(LOG_TAG, "Post parameters : " + requestBody);
