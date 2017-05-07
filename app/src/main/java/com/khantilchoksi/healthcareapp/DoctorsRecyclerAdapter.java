@@ -69,6 +69,7 @@ public class DoctorsRecyclerAdapter extends RecyclerView.Adapter<DoctorsRecycler
 
                     Intent doctorClinicIntent = new Intent(mActivity,DoctorClinicSlotsActivity.class);
                     doctorClinicIntent.putExtra("doctorId",doctorsList.get(getAdapterPosition()).getDoctorId());
+                    doctorClinicIntent.putExtra("doctorName",doctorsList.get(getAdapterPosition()).getDoctorName());
                     mActivity.startActivity(doctorClinicIntent);
 
                 }

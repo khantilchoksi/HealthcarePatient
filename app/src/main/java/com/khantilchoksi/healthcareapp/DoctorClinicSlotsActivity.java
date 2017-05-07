@@ -15,6 +15,9 @@ public class DoctorClinicSlotsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String specialityName = getIntent().getStringExtra("doctorName");
+        setTitle(specialityName);
+
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
